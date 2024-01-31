@@ -1,0 +1,16 @@
+//    public List<Map<String, String>> getStudentGradeBook(int studentId) {
+//        List<Grade> grades = gradeDao.getWithCourseWithStatsByStudentId(studentId);
+//        List<Map<String, String>> gradeBook = new ArrayList<>();
+//        for (Grade grade: grades) {
+//            Course course = grade.getCourse();
+//            CourseStats stats = course.getCourseStats();
+//            Map<String, String> record = new HashMap<>();
+//            record.put("Course", course.getName());
+//            record.put("Grade", String.valueOf(grade.getGradePercent()));
+//            record.put("Average", String.valueOf(stats.getAverage()));
+//            record.put("Minimum", String.valueOf(stats.getMin()));
+//            record.put("Maximum", String.valueOf(stats.getMax()));
+//            gradeBook.add(record);
+//        }
+//        return gradeBook;
+//    }

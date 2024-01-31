@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Management: <span th:text="${user.role}"></span></title>
+</head>
+<body>
+<h1>Logged in as: <span th:text="${user.email}"></span></h1>
+<h2>List of <span th:text="${usersRole}"></span>s</h2>
+<table border="1">
+    <tr>
+        <th>ID</th>
+        <th>Email</th>
+        <th>Name</th>
+        <th>Delete User</th>
+    </tr>
+    <tr th:each="userInfo : ${usersList}">
+        <td th:text="${userInfo.id}"></td>
+        <td th:text="${userInfo.email}"></td>
+        <td th:text="${userInfo.name}"></td>
+        <td>
+            <form th:action="@{/__${user.role}__/delete}" method="post">
+                <input type="hidden" name="actionRole" th:value="${usersRole}">
+                <input type="hidden" name="userId" th:value="${userInfo.id}">
+                <input type="submit" value="Remove">
+            </form>
+        </td>
+    </tr>
+</table>
+
+<h2>Add <span th:text="${usersRole}"></span>s</h2>
+<form th:action="@{/__${user.role}__/add}" method="post">
+    <input type="hidden" name="actionRole" th:value="${usersRole}">
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" required>
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" required>
+    <input type="submit" value="Add user">
+</form>
+
+<br>
+<br>
+<form th:action="@{/__${user.role}__}" method="get">
+    <input type="submit" value="Back to Dashboard"/>
+</form>
+</body>
+</html>

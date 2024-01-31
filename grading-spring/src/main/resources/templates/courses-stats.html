@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Stats: <span th:text="${user.role}"></span></title>
+</head>
+<body>
+<h1>Logged in as: <span th:text="${user.email}"></span></h1>
+<h2 th:if="${coursesWithStats.isEmpty()}">Does not have any courses</h2>
+<h2 th:unless="${coursesWithStats.isEmpty()}">Courses and their stats:</h2>
+<h3><em th:unless="${coursesWithStats.isEmpty()}">click on the course name to view the students grades</em></h3>
+<table border="1" th:if="${not coursesWithStats.isEmpty()}">
+    <tr>
+        <th>Course</th>
+        <th>Average</th>
+        <th>Maximum</th>
+        <th>Minimum</th>
+        <th>Number of Students</th>
+    </tr>
+    <tr th:each="course : ${coursesWithStats}">
+        <td>
+            <a th:href="@{/__${user.role}__/course-grades?id=__${course.id}__&name=__${course.name}__}" th:text="${course.name}"></a>
+        </td>
+        <td th:text="${course.courseStats.average}"></td>
+        <td th:text="${course.courseStats.max}"></td>
+        <td th:text="${course.courseStats.min}"></td>
+        <td th:text="${course.courseStats.studentsCount}"></td>
+    </tr>
+</table>
+<br>
+<br>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+</body>
+</html>

@@ -1,0 +1,47 @@
+    //    List<Grade> getWithCourseWithStatsByStudentId(int studentId); interface
+
+        // update this to populate all data (right or wrong?) I think wrong
+
+    //    @Override
+//    public List<Grade> getWithCourseWithStatsByStudentId(int studentId) { implementation
+//        List<Grade> grades = new ArrayList<>();
+//        try(Connection con = DataSource.getConnection()) {
+//            String sql = "SELECT c.id, c.name, g.grade_percent, a.average, a.maximum, a.minimum\n" +
+//                    "FROM courses c\n" +
+//                    "INNER JOIN grades g\n" +
+//                    "ON c.id = g.course_id\n" +
+//                    "INNER JOIN (\n" +
+//                    "  SELECT course_id, AVG(grade_percent) as average, MIN(grade_percent) as minimum, MAX(grade_percent) as maximum\n" +
+//                    "  FROM grades\n" +
+//                    "  GROUP BY course_id\n" +
+//                    ") a\n" +
+//                    "ON c.id = a.course_id\n" +
+//                    "WHERE g.student_id = ?;";
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setInt(1, studentId);
+//            ResultSet rs = ps.executeQuery();
+//            while(rs.next()) {
+//                int id = rs.getInt("id");
+//                String name = rs.getString("name");
+//                int gradePercent = rs.getInt("grade_percent");
+//                double average =rs.getDouble("average");
+//                int minimum = rs.getInt("minimum");
+//                int maximum = rs.getInt("maximum");
+//                CourseStats stats = new CourseStats();
+//                stats.setAverage(average);
+//                stats.setMin(minimum);
+//                stats.setMax(maximum);
+//                Course course = new Course();
+//                course.setCourseStats(stats);
+//                course.setId(id);
+//                course.setName(name);
+//                Grade grade = new Grade();
+//                grade.setCourse(course);
+//                grade.setGradePercent(gradePercent);
+//                grades.add(grade);
+//            }
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return grades;
+//    }

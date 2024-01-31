@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Course Grades: <span th:text="${user.role}"></span></title>
+</head>
+<body>
+<h1>Logged in as: <span th:text="${user.email}"></span></h1>
+<h2 th:text="${courseName} + ' Course Grades'"></h2>
+<table border="1">
+    <tr>
+        <th>Student ID</th>
+        <th>Student Name</th>
+        <th>Grade Percent</th>
+        <th th:if="${user.role == 'instructor'}">Enter New Grade</th>
+    </tr>
+    <tr th:each="studentGrade : ${courseGrades}">
+        <td th:text="${studentGrade.student.id}"></td>
+        <td th:text="${studentGrade.student.name}"></td>
+        <td th:text="${studentGrade.gradePercent}"></td>
+        <td th:if="${user.role == 'instructor'}">
+            <form th:action="@{/instructor/update-grade}" method="post">
+                <input type="hidden" name="gradeId" th:value="${studentGrade.id}"/>
+                <input type="hidden" name="courseId" th:value="${param.id}"/>
+                <input type="hidden" name="courseName" th:value="${param.name}"/>
+                <input type="number" name="newGrade" step="1"/>
+                <input type="submit" value="Update"/>
+            </form>
+        </td>
+    </tr>
+</table>
+<br>
+<br>
+<form th:action="@{/__${user.role}__}" method="get">
+    <input type="submit" value="Back to Dashboard"/>
+</form>
+</body>
+</html>

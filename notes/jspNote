@@ -1,0 +1,3 @@
+--> DOESN'T WORK
+CHECK IF isElIgnored="false" works in page directive, and if it does,
+remove the JSTL dependency and remove the taglibs in jsps and associated lines in web.xml

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+<!--    <% String role = (String) session.getAttribute("role"); %>-->
+    <title>
+        Student Dashboard
+    </title>
+
+</head>
+<body>
+<h1>
+    Logged in as:
+    <span th:text="${student.email}"/>
+</h1>
+
+<span th:if="${gradeBook.empty}">
+    <h2>Not enrolled in any courses</h2>
+</span>
+<span th:unless="${gradeBook.empty}">
+    <h2>Courses currently enrolled in:</h2>
+    <table border="1">
+        <tr>
+            <th>Course</th>
+            <th>Grade</th>
+            <th>Average</th>
+            <th>Maximum</th>
+            <th>Minimum</th>
+            <!-- <c:forEach var="entry" items="${gradeBook.get(0)}"> -->
+            <!--    <th>${key}</th> -->
+            <!-- </c:forEach> -->
+        </tr>
+        <tr th:each="record: ${gradeBook}">
+            <td th:text="${record['Course']}" />
+            <td th:text="${record['Grade']}" />
+            <td th:text="${record['Average']}" />
+            <td th:text="${record['Maximum']}" />
+            <td th:text="${record['Minimum']}" />
+            <!--<c:forEach var="entry" items="${record}">-->
+            <!--   <td>${entry.value}</td> -->
+            <!--</c:forEach> -->
+        </tr>
+    </table>
+</span>
+
+
+<br>
+<br>
+
+
+
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Logout"/>
+</form>
+</body>
+</html>

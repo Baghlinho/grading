@@ -1,0 +1,6 @@
+String sql = "SELECT c.id, c.name, AVG(grade_percent) as average, MIN(grade_percent) as minimum, MAX(grade_percent) as maximum, COUNT(student_id) as students_count\n" +
+                "    FROM courses c\n" +
+                "    INNER JOIN grades g\n" +
+                "    ON c.id = g.course_id\n" +
+                "    WHERE c.instructor_id = ?\n" +
+                "    GROUP BY c.name;";
